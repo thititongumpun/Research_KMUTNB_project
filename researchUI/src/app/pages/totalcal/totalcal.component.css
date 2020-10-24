@@ -1,0 +1,7 @@
+.table-bordered td, .table-bordered th {
+  border: 1px solid #9199a1;
+}
+
+.modal-response {
+  margin-top: -2% !important;
+}

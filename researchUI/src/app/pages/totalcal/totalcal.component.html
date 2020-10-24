@@ -1,0 +1,86 @@
+<div bsModal #Monitor="bs-modal" class="modal fade modal-response">
+  <div class="modal-dialog modal-xl" [ngStyle]="{ 'margin-top' : '5%' }">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          <i class="fas fa-clipboard-list mr-2"></i> Response
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="CloseResponseMonitor()">
+          <i class="fas fa-times-circle"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card border-dark mb-3">
+          <div class="card-header">JSON</div>
+          <div class="card-body text-dark">
+            <pre> {{ response | json }}</pre>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="CloseResponseMonitor()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <div class="text-center">
+        <div class="row d-flex justify-content-between my-4">
+          <div class="col text-left">
+            <h2 class="ml-3"> <i class="fas fa-tv"></i></h2>
+          </div>
+          <div class="col text-right">
+            <button type="button" class="btn btn-primary mr-3" (click)="SendAll()" [disabled]="disabledAll">
+              <i class="fas fa-tv mr-2"></i> Send All
+            </button>
+            <button type="button" class="btn btn-info" (click)="Refresh()" [disabled]="disabledAll">
+              <i class="fas fa-sync-alt mr-2"></i> Refresh
+            </button>
+          </div>
+        </div>
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr class="text-center">
+              <th style="width:1%">#</th>
+              <th style="width:10%">Service</th>
+              <th style="width:1%">Status</th>
+              <th style="width:5%">DateTime</th>
+              <th style="width:1%">Duration</th>
+              <th style="width:1%">Response</th>
+              <th style="width:1%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center" *ngFor="let item of items; let i = index">
+              <td> {{ i + 1 }} </td>
+              <td class="text-left"> {{ item.name }} </td>
+              <td>
+                <span class="badge badge-success" *ngIf="item.status === true "> Success </span>
+                <span class="badge badge-danger"  *ngIf="item.status === false"> Failed </span>
+              </td>
+              <td>
+                <span *ngIf="item.date">{{ item.date }}</span>
+              </td>
+              <td>
+                <span *ngIf="item.time">{{ item.time }}</span>
+              </td>
+              <td>
+                <button class="btn btn-secondary btn-sm" (click)="ShowResponseMonitor(item.code)">
+                  <i class="fas fa-clipboard-list"></i>
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm" (click)="Action(item.code)" [disabled]="item.disabled">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+{
+  "requestNumber": "DCRGUAT",
+  "channelId": 5637147576,
+  "storeNumber": "2420",
+  "userId": "45555555",
+  "terminalId": 5637149826,
+  "terminalPOSId": "2420103",
+  "stampDate": null,
+  "affiliation": [
+    {
+      "cardNumber": "7000049549",
+      "retailAffiliation": "5637161084"
+    }
+  ],
+  "inputCoupon": [],
+  "cartLine": [
+    {
+      "barcode": "0090002218800",
+      "itemId": "9000221880",
+      "quantity": 1
+    },
+    {
+      "barcode": "0090001179843",
+      "itemId": "9000117984",
+      "quantity": 1
+    },
+    {
+      "barcode": "0090000944978",
+      "itemId": "9000094497",
+      "quantity": 1
+    },
+    {
+      "barcode": "0090002001112",
+      "itemId": "9000200111",
+      "quantity": 1
+    },
+    {
+      "barcode": "0090001805025",
+      "itemId": "9000180502",
+      "quantity": 1
+    }
+  ],
+  "cartId": null
+}

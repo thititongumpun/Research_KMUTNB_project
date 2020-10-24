@@ -1,0 +1,32 @@
+{
+  "requestNumber": "LoftUAT",
+  "channelId": 5637144576,
+  "storeNumber": "2020",
+  "userId": "45555555",
+  "terminalId": 5637203826,
+  "terminalPOSId": "2020403",
+  "stampDate": null,
+  "affiliation": [
+      {
+        "cardNumber": "7000049471",
+        "retailAffiliation": "5637161084"
+      }
+    ],
+  "inputCoupon": [],
+  "cartLine": [
+    {
+      "barcode": "0090001655064",
+      "itemId": "9000165506",
+      "quantity": 1,
+      "price": 0.0
+    },
+    {
+      "barcode": "0000020829582",
+      "itemId": "2082958",
+      "quantity": 1,
+      "price": 0.0
+    }
+  ],
+  "cartId": null,
+  "discountCode": []
+}
