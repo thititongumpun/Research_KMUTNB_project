@@ -24,6 +24,9 @@ export class TotalcalComponent implements OnInit {
   items = [
     { code: 'MONGODB Read', name: 'MONGODB Read', status: null, date: null, time: null, response: null, disabled: false },
     { code: 'MONGODB INSERT 1 ROW', name: 'MONGODB INSERT 1 Row', status: null, date: null, time: null, response: null, disabled: false },
+    { code: 'MONGODB INSERT 500 ROWS', name: 'MONGODB INSERT 500 ROWS', status: null, date: null, time: null, response: null, disabled: false },
+    { code: 'MONGODB Filter', name: 'MONGODB Filter', status: null, date: null, time: null, response: null, disabled: false },
+    { code: 'MONGODB Delete', name: 'MONGODB Delete', status: null, date: null, time: null, response: null, disabled: false },
     { code: 'SQL Read', name: 'SQL Read', status: null, date: null, time: null, response: null, disabled: false },
     { code: 'SQL INSERT 1 ROW', name: 'SQL INSERT 1 ROW', status: null, date: null, time: null, response: null, disabled: false },
     { code: 'SQL INSERT 500 ROWS', name: 'SQL INSERT 500 ROWS', status: null, date: null, time: null, response: null, disabled: false },
@@ -37,6 +40,9 @@ export class TotalcalComponent implements OnInit {
   Refresh(): void {
     this.Clear('MONGODB Read');
     this.Clear('MONGODB INSERT 1 ROW');
+    this.Clear('MONGODB INSERT 500 ROWS');
+    this.Clear('MONGODB Filter');
+    this.Clear('MONGODB Delete');
     this.Clear('SQL Read');
     this.Clear('SQL INSERT 1 ROW');
     this.Clear('SQL INSERT 500 ROWS');
@@ -81,6 +87,15 @@ export class TotalcalComponent implements OnInit {
       case 'MONGODB INSERT 1 ROW':
         this.response = this.items.filter(element => element.code === 'MONGODB INSERT 1 ROW')[0].response;
         break;
+      case 'MONGODB INSERT 500 ROWS':
+        this.response = this.items.filter(element => element.code === 'MONGODB INSERT 1 ROW')[0].response;
+        break;
+      case 'MONGODB Filter':
+        this.response = this.items.filter(element => element.code === 'MONGODB Filter')[0].response;
+        break;
+      case 'MONGODB Delete':
+        this.response = this.items.filter(element => element.code === 'MONGODB Filter')[0].response;
+        break;
       case 'SQL INSERT 1 ROW':
         this.response = this.items.filter(element => element.code === 'SQL INSERT 1 ROW')[0].response;
         break;
@@ -124,15 +139,35 @@ export class TotalcalComponent implements OnInit {
       case 'MONGODB Read':
         this.Clear('MONGODB Read');
         this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
-        this.apiServiceService.Get('Books').subscribe(response => this.SetAction('MONGODB Read', startTime, response),
+        this.apiServiceService.Get('Customer').subscribe(response => this.SetAction('MONGODB Read', startTime, response),
         error => this.Error('MONGODB Read', startTime, error));
         break;
       case 'MONGODB INSERT 1 ROW':
-        this.Clear('SQL INSERT 500 ROW');
+        this.Clear('MONGODB INSERT 1 ROW');
         this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
-        this.apiServiceService.Post('Books').subscribe(response => this.SetAction('MONGODB INSERT 1 ROW', startTime, response),
+        this.apiServiceService.PostNOSQL('Customer').subscribe(response => this.SetAction('MONGODB INSERT 1 ROW', startTime, response),
         error => this.Error('MONGODB INSERT 1 ROW', startTime, error));
         break;
+      case 'MONGODB INSERT 500 ROWS':
+        for (let i = 0; i < 500; i++) {
+          this.Clear('SQL INSERT 500 ROW');
+          this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
+          this.apiServiceService.Post('Customer').subscribe(response => this.SetAction('MONGODB INSERT 500 ROWS', startTime, response),
+          error => this.Error('MONGODB INSERT 500 ROWS', startTime, error));
+        }
+        break;
+      case 'MONGODB Filter':
+        this.Clear('MONGODB Filter');
+        this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
+        this.apiServiceService.Filter('Customer/55').subscribe(response => this.SetAction('MONGODB Filter', startTime, response),
+        error => this.Error('MONGODB IFilter', startTime, error));
+        break;
+        case 'MONGODB Delete':
+          this.Clear('MONGODB Delete');
+          this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
+          this.apiServiceService.DeleteSQL('Customer/55').subscribe(response => this.SetAction('MONGODB Delete', startTime, response),
+          error => this.Error('MONGODB Delete', startTime, error));
+          break;
       case 'SQL INSERT 1 ROW':
         this.Clear('SQL INSERT 1 ROW');
         this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
@@ -143,7 +178,7 @@ export class TotalcalComponent implements OnInit {
         for (let i = 0; i < 500; i++){
           this.Clear('SQL INSERT 500 ROWS');
           this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
-          this.apiServiceService.PostSQL('Customers').subscribe(response => this.SetAction('SQL INSERT 500 ROWS', startTime, response),
+          this.apiServiceService.Post('Customers').subscribe(response => this.SetAction('SQL INSERT 500 ROWS', startTime, response),
           error => this.Error('SQL INSERT 500 ROWS', startTime, error));
         }
         break;

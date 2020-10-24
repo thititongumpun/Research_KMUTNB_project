@@ -25,17 +25,21 @@ export class ApiServiceService {
     return this.http.post(this.baseUrl + url, { headers: headers }, {})
   }
 
-  PostSQL(url): Observable<any> {
+  PostNOSQL(url): Observable<any> {
     const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*' };
 
     let body = {
-      "Cus_name": "vv",
-      "gender": "m",
-      "address": "dasd",
-      "phone": "123",
-      "email": "dsadas"
+      "CUS_ID": 12345,
+      "SHOP_ID": 55,
+      "PRODUCTTYPE": "Computers" ,
+      "phone": "123-555-555",
     }
     return this.http.post(this.baseUrl + url, body,{ headers: headers })
+  }
+
+  PostSQL(url): Observable<any> {
+    const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*' };
+    return this.http.post(this.baseUrl + url, { headers: headers }, {})
   }
 
   PostSQL1ROW(url): Observable<any> {
