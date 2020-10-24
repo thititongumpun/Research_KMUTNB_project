@@ -39,21 +39,37 @@ export class ApiServiceService {
 
   PostSQL(url): Observable<any> {
     const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*' };
-    return this.http.post(this.baseUrl + url, { headers: headers }, {})
+    let body = {
+      "CUS_ID": 123,
+      "SHOP_ID": 55,
+      "Active_Time_Log": new Date().toISOString,
+      "Product_Type": "IPhone"
+    }
+    return this.http.post(this.baseUrl + url, body, { headers: headers })
   }
 
-  PostSQL1ROW(url): Observable<any> {
+  PostSQLROW(url): Observable<any> {
     const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*' };
     return this.http.post(this.baseUrl + url, {
-      "Cus_name": "eiei",
-      "gender": "m",
-      "address": "dasd",
-      "phone": "123",
-      "email": "dsadas"
+      "CUS_ID": 123,
+      "SHOP_ID": 45,
+      "Active_Time_Log": new Date().toISOString,
+      "Product_Type": "Computers"
     },{ headers: headers })
   }
 
   DeleteSQL(url): Observable<any> {
-    return this.http.delete(this.baseUrl + url)
+    return this.http.delete(this.baseUrl + url);
   }
+
+  ClearSQL(url): Observable<any> {
+    const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*' };
+    return this.http.post(this.baseUrl + url, {headers: headers});
+  }
+
+  ClearMongoDB(url): Observable<any> {
+    const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*' };
+    return this.http.post(this.baseUrl + url, { headers: headers });
+  }
+
 }

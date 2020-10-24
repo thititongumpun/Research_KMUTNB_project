@@ -8,7 +8,7 @@ namespace DemoRM.Data.Repository.Interface
     {
         void CreateCustomer(Customer token);
         Task<IEnumerable<Customer>> GetCustomers();
-        Task<Customer> GetCustomer(string cusName);
+        Task<Customer> GetCustomer(int id);
         public void RemoveCustomer(Customer customer);
         void Save();
     }

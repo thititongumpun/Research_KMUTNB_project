@@ -1,15 +1,18 @@
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DemoRM.Models
-{   
+{
     public class Customer
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        // public int Id { get; set; }
+        public int LOG_ID { get; set; }
         public int CUS_ID { get; set; }
-        public string CUS_NAME { get; set; }
-        public string GENDER { get; set; }
-        public string ADDRESS { get; set; }
-        public string PHONE { get; set; }
-        public string Email { get; set; }
+        public int SHOP_ID { get; set; }
+        public DateTime Active_Time_Log { get; set; }
+        public string Product_Type {get;set;}
     }
 }

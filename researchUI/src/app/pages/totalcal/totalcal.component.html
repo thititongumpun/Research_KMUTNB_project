@@ -33,8 +33,11 @@
             <h2 class="ml-3"> <i class="fas fa-tv"></i></h2>
           </div>
           <div class="col text-right">
-            <button type="button" class="btn btn-primary mr-3" (click)="SendAll()" [disabled]="disabledAll">
-              <i class="fas fa-tv mr-2"></i> Send All
+            <button type="button" class="btn btn-primary mr-1" (click)="ClearSQL()" [disabled]="disabledAll">
+              <i class="fas fa-tv mr-2"></i> ClearSQLDatabase
+            </button>
+            <button type="button" class="btn btn-primary mr-1" (click)="ClearMongoDB()" [disabled]="disabledAll">
+              <i class="fas fa-tv mr-2"></i> ClearMongoDatabase
             </button>
             <button type="button" class="btn btn-info" (click)="Refresh()" [disabled]="disabledAll">
               <i class="fas fa-sync-alt mr-2"></i> Refresh

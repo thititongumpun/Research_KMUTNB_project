@@ -23,14 +23,14 @@ export class TotalcalComponent implements OnInit {
 
   items = [
     { code: 'MONGODB Read', name: 'MONGODB Read', status: null, date: null, time: null, response: null, disabled: false },
-    { code: 'MONGODB INSERT 1 ROW', name: 'MONGODB INSERT 1 Row', status: null, date: null, time: null, response: null, disabled: false },
-    { code: 'MONGODB INSERT 500 ROWS', name: 'MONGODB INSERT 500 ROWS', status: null, date: null, time: null, response: null, disabled: false },
-    { code: 'MONGODB Filter', name: 'MONGODB Filter', status: null, date: null, time: null, response: null, disabled: false },
-    { code: 'MONGODB Delete', name: 'MONGODB Delete', status: null, date: null, time: null, response: null, disabled: false },
     { code: 'SQL Read', name: 'SQL Read', status: null, date: null, time: null, response: null, disabled: false },
+    { code: 'MONGODB INSERT 1 ROW', name: 'MONGODB INSERT 1 Row', status: null, date: null, time: null, response: null, disabled: false },
     { code: 'SQL INSERT 1 ROW', name: 'SQL INSERT 1 ROW', status: null, date: null, time: null, response: null, disabled: false },
+    { code: 'MONGODB INSERT 500 ROWS', name: 'MONGODB INSERT 500 ROWS', status: null, date: null, time: null, response: null, disabled: false },
     { code: 'SQL INSERT 500 ROWS', name: 'SQL INSERT 500 ROWS', status: null, date: null, time: null, response: null, disabled: false },
+    { code: 'MONGODB Filter', name: 'MONGODB Filter', status: null, date: null, time: null, response: null, disabled: false },
     { code: 'SQL Filter', name: 'SQL Filter', status: null, date: null, time: null, response: null, disabled: false },
+    { code: 'MONGODB Delete', name: 'MONGODB Delete', status: null, date: null, time: null, response: null, disabled: false },
     { code: 'SQL Delete', name: 'SQL Delete', status: null, date: null, time: null, response: null, disabled: false },
   ];
 
@@ -108,8 +108,8 @@ export class TotalcalComponent implements OnInit {
       case 'SQL Filter':
         this.response = this.items.filter(element => element.code === 'SQL Filter')[0].response;
         break;
-      case 'SQL Delte':
-        this.response = this.items.filter(element => element.code === 'SQL Filter')[0].response;
+      case 'SQL Delete':
+        this.response = this.items.filter(element => element.code === 'SQL Delete')[0].response;
         break;
     }
     this.Monitor.show();
@@ -149,7 +149,7 @@ export class TotalcalComponent implements OnInit {
         error => this.Error('MONGODB INSERT 1 ROW', startTime, error));
         break;
       case 'MONGODB INSERT 500 ROWS':
-        for (let i = 0; i < 500; i++) {
+        for (let i = 0; i < 500; ++i) {
           this.Clear('SQL INSERT 500 ROW');
           this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
           this.apiServiceService.Post('Customer').subscribe(response => this.SetAction('MONGODB INSERT 500 ROWS', startTime, response),
@@ -171,14 +171,14 @@ export class TotalcalComponent implements OnInit {
       case 'SQL INSERT 1 ROW':
         this.Clear('SQL INSERT 1 ROW');
         this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
-        this.apiServiceService.PostSQL1ROW('Customers').subscribe(response => this.SetAction('SQL INSERT 1 ROW', startTime, response),
+        this.apiServiceService.PostSQL('Customers').subscribe(response => this.SetAction('SQL INSERT 1 ROW', startTime, response),
         error => this.Error('SQL INSERT 1 ROW', startTime, error));
         break;
       case 'SQL INSERT 500 ROWS':
-        for (let i = 0; i < 500; i++){
+        for (let i = 0; i < 500; ++i){
           this.Clear('SQL INSERT 500 ROWS');
           this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
-          this.apiServiceService.Post('Customers').subscribe(response => this.SetAction('SQL INSERT 500 ROWS', startTime, response),
+          this.apiServiceService.PostSQLROW('Customers').subscribe(response => this.SetAction('SQL INSERT 500 ROWS', startTime, response),
           error => this.Error('SQL INSERT 500 ROWS', startTime, error));
         }
         break;
@@ -191,38 +191,23 @@ export class TotalcalComponent implements OnInit {
       case 'SQL Filter':
         this.Clear('SQL Filter');
         this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
-        this.apiServiceService.Filter('Customers/eiei').subscribe(response => this.SetAction('SQL Filter', startTime, response),
+        this.apiServiceService.Filter('Customers/55').subscribe(response => this.SetAction('SQL Filter', startTime, response),
         error => this.Error('SQL Filter', startTime, error));
         break;
       case 'SQL Delete':
         this.Clear('SQL Delete');
         this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
-        this.apiServiceService.DeleteSQL('Customers/eiei').subscribe(response => this.SetAction('SQL Delete', startTime, response),
+        this.apiServiceService.DeleteSQL('Customers/Iphone').subscribe(response => this.SetAction('SQL Delete', startTime, response),
         error => this.Error('SQL Delete', startTime, error));
         break;
     }
   }
 
-  async SendAll(): Promise<void> {
-    this.Clear('DCRG');
-    this.Clear('LOFT');
-    this.Clear('ENCRYPTED');
-    this.Clear('GATEWAY');
-    let startTime = null;
-    this.disabledAll = true;
-    this.items.forEach(element => element.disabled = true);
-    startTime = new Date();
-    this.SetAction('DCRG', startTime, await this.apiServiceService.Get('GetDCRG').toPromise()
-    .catch(error => this.Error('DCRG', startTime, error)));
-    startTime = new Date();
-    this.SetAction('LOFT', startTime, await this.apiServiceService.Get('GetLOFT').toPromise()
-    .catch(error => this.Error('LOFT', startTime, error)));
-    startTime = new Date();
-    this.SetAction('GATEWAY', startTime, await this.apiServiceService.Get('GetGateway').toPromise()
-    .catch(error => this.Error('GATEWAY', startTime, error)));
-    startTime = new Date();
-    this.SetAction('ENCRYPTED', startTime, await this.apiServiceService.Get('GetEncrypted').toPromise()
-    .catch(error => this.Error('ENCRYPTED', startTime, error)));
-    this.disabledAll = false;
+  ClearSQL(): void {
+    this.apiServiceService.ClearSQL('Customers/drop').subscribe(response => console.log(response));
+  }
+
+  ClearMongoDB(): void {
+    this.apiServiceService.ClearMongoDB('Customer/drop').subscribe(response => console.log(response));
   }
 }

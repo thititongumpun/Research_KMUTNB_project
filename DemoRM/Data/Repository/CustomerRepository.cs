@@ -21,19 +21,16 @@ namespace DemoRM.Data.Repository
             return await GetAll().ToListAsync();
         }
 
-        // public Customer GetOneCustomer(int id)
-        // {
-        //     return GetByCondition(x => x.CUS_ID == id).SingleOrDefault();
-        // }
-
-        public async Task<Customer> GetCustomer(string cusName)
+        public async Task<Customer> GetCustomer(int id)
         {
-            return await GetByCondition(x => x.CUS_NAME.Equals(cusName)).FirstOrDefaultAsync();
+            return await GetByCondition(x => x.SHOP_ID.Equals(55)).FirstOrDefaultAsync();
         }
 
         public void RemoveCustomer(Customer customer)
         {
             Remove(customer);
         }
+
+        
     }
 }
