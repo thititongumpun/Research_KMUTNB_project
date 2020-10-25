@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable  } from 'rxjs';
+import { DatePipe } from '@angular/common'
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +54,7 @@ export class ApiServiceService {
     return this.http.post(this.baseUrl + url, {
       "CUS_ID": 123,
       "SHOP_ID": 45,
-      "Active_Time_Log": new Date().toISOString,
+      "Active_Time_Log": new Date(),
       "Product_Type": "Computers"
     },{ headers: headers })
   }

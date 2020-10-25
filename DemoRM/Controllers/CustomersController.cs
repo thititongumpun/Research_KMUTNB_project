@@ -68,7 +68,7 @@ namespace pmk_api.Controllers
         [HttpPost("drop")]
         public IActionResult DeleteTable()
         {
-            string connectionString = "Server=localhost;Database=DemoRM;Trusted_Connection=True;";
+            string connectionString = "Server=localhost,1401;Database=DemoRM;User=sa;Password=YourStrong!Passw0rd;MultipleActiveResultSets=True;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string sql = $"Delete From tbl_customer";

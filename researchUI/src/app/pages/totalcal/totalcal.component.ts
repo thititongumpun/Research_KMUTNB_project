@@ -149,7 +149,7 @@ export class TotalcalComponent implements OnInit {
         error => this.Error('MONGODB INSERT 1 ROW', startTime, error));
         break;
       case 'MONGODB INSERT 500 ROWS':
-        for (let i = 0; i < 500; ++i) {
+        for (let i = 0; i < 500; i++) {
           this.Clear('SQL INSERT 500 ROW');
           this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
           this.apiServiceService.Post('Customer').subscribe(response => this.SetAction('MONGODB INSERT 500 ROWS', startTime, response),
@@ -175,7 +175,7 @@ export class TotalcalComponent implements OnInit {
         error => this.Error('SQL INSERT 1 ROW', startTime, error));
         break;
       case 'SQL INSERT 500 ROWS':
-        for (let i = 0; i < 500; ++i){
+        for (let i = 0; i < 500; i++){
           this.Clear('SQL INSERT 500 ROWS');
           this.items.forEach(element => element.disabled = (element.code === type) ? true : false);
           this.apiServiceService.PostSQLROW('Customers').subscribe(response => this.SetAction('SQL INSERT 500 ROWS', startTime, response),
